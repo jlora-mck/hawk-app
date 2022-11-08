@@ -16,6 +16,7 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import Config from "../config"
 import {
+  LoginScreen,
   WelcomeScreen,
 } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
@@ -35,6 +36,7 @@ import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
  */
 export type AppStackParamList = {
   Welcome: undefined
+  Login: undefined
   // 🔥 Your screens go here
 }
 
@@ -57,9 +59,12 @@ const AppStack = observer(function AppStack() {
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
     >
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      {/** 🔥 Your screens go here */}
+          <Stack.Screen name="Welcome" component={LoginScreen} />
+      {/** 🔥 Your screens go here */
+      <Stack.Screen name="Login" component={LoginScreen} />
+      }
     </Stack.Navigator>
+    
   )
 })
 

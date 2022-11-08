@@ -23,6 +23,13 @@ const en = {
       button: "Let's try this again",
     },
   },
+  loginScreen: {
+    code: "Código",
+    user: "Usuario",
+    password: "Contraseña",
+    enter: "Ingresar",
+    welcomeMessage:"Valida tus datos utilizando tus credenciales de BI en línea"
+  },
 }
 
 export default en
