@@ -1,13 +1,13 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from "react"
+import React, { FC, useMemo, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { TextInput, TextStyle, ViewStyle } from "react-native"
-import { StackScreenProps } from "@react-navigation/stack"
+import { TextInput, TextStyle, ViewStyle, Image, ImageStyle, View } from "react-native"
 import { AppStackScreenProps } from "../../navigators"
 import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../../components"
 import { colors, spacing } from "../../theme"
 import { useStores } from "../../models"
-import { NONE } from "apisauce"
-import { Colors } from "react-native/Libraries/NewAppScreen"
+import { isRTL } from "../../i18n"
+
+const bancoIndustrial = require("../../../assets/images/banco-industrial.png")
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
@@ -64,11 +64,15 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={["top", "bottom"]}
     >
+      <View style={$imageContainer}>
+        <Image style={$bancoIndustrial} source={bancoIndustrial} resizeMode="contain" />
+      </View>
+
       <Text
         testID="login-heading"
         tx="loginScreen.welcomeMessage"
         preset="heading"
-        style={$signIn}
+        style={$welcomeMessage}
       />
 
       <TextField
@@ -117,7 +121,8 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       <Button
         testID="login-button"
         tx="loginScreen.enter"
-        style={$tapButton}
+        style={$enterButton}
+        textStyle={$enterTextButton}
         preset="reversed"
         onPress={login}
       />
@@ -128,12 +133,13 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.huge,
   paddingHorizontal: spacing.large,
-  backgroundColor: "#0B1856",
+  backgroundColor: colors.palette.secondary600,
 }
 
-const $signIn: TextStyle = {
+const $welcomeMessage: TextStyle = {
   marginBottom: spacing.small,
-  color: "#14961F",
+  color: colors.palette.secondary700,
+  fontSize: 26,
 }
 
 const $hint: TextStyle = {
@@ -144,10 +150,22 @@ const $hint: TextStyle = {
 const $textField: ViewStyle = {
   marginBottom: spacing.large,
   borderWidth: 0,
-  backgroundColor: NONE,
 }
 
-const $tapButton: ViewStyle = {
+const $enterButton: ViewStyle = {
   marginTop: spacing.extraSmall,
-  backgroundColor: "#0C957B",
+  backgroundColor: colors.palette.secondary800,
+  borderRadius: 20,
 }
+
+const $bancoIndustrial: ImageStyle = {
+  height: 100,
+}
+
+const $imageContainer: ViewStyle = {
+  flex: 1,
+  justifyContent: "center",
+  alignContent: "center",
+}
+
+const $enterTextButton: TextStyle = { fontSize: 22 }

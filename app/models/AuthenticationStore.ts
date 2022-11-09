@@ -4,17 +4,12 @@ import { api } from "../services/api"
 export const AuthenticationStoreModel = types //CODE REVIEW: leer qué significan las propiedades 'views', 'actions', etc en MobX
   .model("AuthenticationStore")
   .props({
-    authToken: types.maybe(types.string),
     authCode: types.optional(types.string, ""),
     authUsername: types.optional(types.string, ""),
     authPassword: types.optional(types.string, ""),
-    authFullName: types.optional(types.string, ""),
     isLoginError: types.optional(types.boolean, false),
   })
   .views((store) => ({
-    get isAuthenticated() {
-      return !!store.authToken
-    },
     get validationErrors() {
       return {
         authCode: (function () {
